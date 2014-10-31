@@ -14,7 +14,7 @@ var iconPosition = 0;
 var dateText = "";
 var canvasWidth, canvasHeight;
 var canvas;
-var zoomValue = false;
+//var zoomValue = false;
 
 //Preload images and data
 function preload(){
@@ -209,15 +209,19 @@ function draw(){
 	}
 
 	//Title
+	fill(193, 31, 67);
+	noStroke();
+	rect(titleStartX, legendStartY-5*screenRatio, titleWidth, 25*screenRatio);
+
 	textStyle(BOLD);
 	textAlign(LEFT);
-	fill(0);
 	noStroke();
 	var titleText = "EL NIÑO - A GLOBAL PHENOMENON";
 	var textDistance = 0;
+	fill(0);
 	for (var k = 0; k < titleText.length; k++) {
 		textSize(22*screenRatio);
-		text(titleText.charAt(k), titleStartX+textDistance, titleStartY);
+		text(titleText.charAt(k), titleStartX+textDistance, legendStartY+16*screenRatio);
 		textDistance = textDistance + map(textWidth(titleText.charAt(k)), 0, textWidth(titleText), 0, titleWidth);
 	};
 	stroke(0);
@@ -225,8 +229,8 @@ function draw(){
 	textStyle(NORMAL);
 	noStroke();
 	textSize(9*screenRatio);
-	textLeading(12*screenRatio);
-	text("For years, the El Niño Southern Oscillation (ENSO) was understood as a regional phenomenon that mainly affected ocean temperatures and precipitation. But in recent decades, scientists have discovered diverse and far-reaching effects of ENSO on everything from mudslides in Africa to the military history of Europe. El Niño causes many of Earth's most drastic variations in weather, temperature, and rainfall--and its worldwide consequences illustrate how deeply interconnected our planet's climate really is.", titleStartX, titleStartY+2*screenRatio, titleWidth, 400);
+	//textLeading(12*screenRatio);
+	//text("For years, the El Niño Southern Oscillation (ENSO) was understood as a regional phenomenon that mainly affected ocean temperatures and precipitation. But in recent decades, scientists have discovered diverse and far-reaching effects of ENSO on everything from mudslides in Africa to the military history of Europe. El Niño causes many of Earth's most drastic variations in weather, temperature, and rainfall--and its worldwide consequences illustrate how deeply interconnected our planet's climate really is.", titleStartX, titleStartY+2*screenRatio, titleWidth, 400);
 
 	//Highlight rectangle
 	stroke(0);
@@ -283,37 +287,37 @@ function draw(){
 	image(imgSociety, legendStartX+legendWidth/6*5+5, legendStartY+35*screenRatio, 15*screenRatio, 15*screenRatio);
 
 	//Zoom In & Zoom Out
-	// stroke(0);
-	// strokeWeight(.25);
-	// noFill();
-	// for(var i=0; i<2; i++){
-	// 	rect(mapWidth-i*(82*screenRatio), legendStartY+30*screenRatio, -80*screenRatio, 25*screenRatio);
-	// }
-
-	// noStroke();
-	// fill(0);
-	// textSize(10*screenRatio);
-	// textAlign(CENTER);
-	// text("Zoom In", mapWidth-82*screenRatio-40*screenRatio, legendStartY+45*screenRatio);
-	// text("Zoom Out", mapWidth-40*screenRatio, legendStartY+45*screenRatio);
-
-	noStroke();
-	fill(100, 35);
-	if(zoomValue == true){
-		rect(20, 20, 25, 25);
-	}
-
 	stroke(0);
 	strokeWeight(.25);
 	noFill();
-	//fill(193, 31, 67);
 	for(var i=0; i<2; i++){
-		rect(20+i*30, 20, 25, 25);
+		rect(mapWidth-i*(82*screenRatio), legendStartY+30*screenRatio, -80*screenRatio, 25*screenRatio);
 	}
-	strokeWeight(2);
-	line(25, 32.5, 40, 32.5);
-	line(32.5, 25, 32.5, 40);
-	line(55, 32.5, 70, 32.5);
+
+	noStroke();
+	fill(0);
+	textSize(10*screenRatio);
+	textAlign(CENTER);
+	text("Zoom In", mapWidth-82*screenRatio-40*screenRatio, legendStartY+45*screenRatio);
+	text("Zoom Out", mapWidth-40*screenRatio, legendStartY+45*screenRatio);
+
+	// noStroke();
+	// fill(100, 35);
+	// if(zoomValue == true){
+	// 	rect(20, 20, 25, 25);
+	// }
+
+	// stroke(0);
+	// strokeWeight(.25);
+	// noFill();
+	// //fill(193, 31, 67);
+	// for(var i=0; i<2; i++){
+	// 	rect(20+i*30, 20, 25, 25);
+	// }
+	// strokeWeight(2);
+	// line(25, 32.5, 40, 32.5);
+	// line(32.5, 25, 32.5, 40);
+	// line(55, 32.5, 70, 32.5);
 
 	//noStroke();
 	//fill(0);
@@ -325,15 +329,15 @@ function draw(){
 
 function mousePressed(){
 	//Zoom In & Out actions
-	if (mouseX > 20 && mouseX < 45 && mouseY > 20 && mouseY < 45){
+	if (mouseX > mapWidth-82*screenRatio-80*screenRatio && mouseX < mapWidth-82*screenRatio && mouseY > legendStartY+30*screenRatio && mouseY < legendStartY+30*screenRatio+25*screenRatio){
 		canvasWidth = windowWidth*1.5;
 		canvasHeight = windowHeight*1.5;
-		zoomValue = true;
+		//zoomValue = true;
 	}
-	if (mouseX > 50 && mouseX < 80 && mouseY > 20 && mouseY < 45){
+	if (mouseX > mapWidth-80*screenRatio && mouseX < mapWidth && mouseY > legendStartY+30*screenRatio && mouseY < legendStartY+30*screenRatio+25*screenRatio){
 		canvasWidth = windowWidth;
 		canvasHeight = windowHeight;
-		zoomValue = false;
+		//zoomValue = false;
 	}
 
 	//Date actions
